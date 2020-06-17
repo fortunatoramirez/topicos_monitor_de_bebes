@@ -42,26 +42,6 @@ io.on('connection',function(socket){
   		io.sockets.emit('messages',messages);
 	});
 
-	socket.on('viejo', function(msg){
-		//console.log(msg.contenido);
-		var sql = `SELECT * FROM messages_2`;
-		con.query(sql, function (err, result) {
-			if (err) throw err;
-    		//console.log(result);
-    		io.sockets.emit('historial',result);
-		});
-	});
-
-	socket.on('detective', function(msg){
-		//console.log(msg.contenido);
-		var sql = `SELECT * FROM messages_2 WHERE nickname = '${msg.usuario}'`;
-		con.query(sql, function (err, result) {
-			if (err) throw err;
-    		console.log(result);
-    		io.sockets.emit('historial',result);
-		});
-	});
-
 	socket.on('inicio_sesion', function(msg){
 		console.log(msg.usuario);
 		console.log(msg.contrasena);
