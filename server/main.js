@@ -5,7 +5,7 @@ var io = require('socket.io')(server);
 var path = require('path');
 
 /* Conexión a la base de datos */
-/* var mysql = require('mysql');
+var mysql = require('mysql');
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "topicos",
@@ -16,19 +16,60 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected to database.");
-});*/
+});
 /********************************/
 
-var messages = [{
-	text: "Hola, bienvenidos...",
-	author: "Administrador"
-}];
-
 app.use(express.static('public'));
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+
+/*
 app.get('/home', function(req, res){
 	//res.status(200).send("Hola mundo");
-	res.sendFile(path.join(__dirname + '/home.html'));
+	//res.sendFile(path.join(__dirname + '/home.html'));
 });
+*/
+
+/* inicio de sesión */
+app.post('/auth', function(request, response) {
+	var username = request.body.username;
+	var password = request.body.password;
+	if (username && password) {
+		connection.query('SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				request.session.loggedin = true;
+				request.session.username = username;
+				response.redirect('/home');
+			} else {
+				response.send('Incorrect Username and/or Password!');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter Username and Password!');
+		response.end();
+	}
+});
+
+
+app.get('/home', function(request, response) {
+	if (request.session.loggedin) {
+		//response.send('Welcome back, ' + request.session.username + '!');
+		response.sendFile(path.join(__dirname + 'public/senales.html'));
+	} else {
+		response.send('Por favor, iniciar sesión para ver esta página');
+	}
+	response.end();
+});
+
+
+
 
 io.on('connection',function(socket){
 	socket.emit('messages',messages);
