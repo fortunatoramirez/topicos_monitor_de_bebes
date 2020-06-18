@@ -71,7 +71,7 @@ app.get('/home', function(request, response) {
         */
 
         var html = fs.readFileSync(path.join(__dirname + '/private/senales.html'), 'utf8')
-    	res.render('home', { html: html })
+    	response.render('home', { html: html })
 
 		/*
 		fs.readFile(path.join(__dirname + '/private/senales.html'), function (error, pgResp) {
