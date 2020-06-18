@@ -63,7 +63,7 @@ app.post('/auth', function(request, response) {
 app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
 		//response.send('Welcome back, ' + request.session.username + '!');
-		response.sendFile(path.join(__dirname + 'public/senales.html'));
+		response.sendFile(path.join(__dirname + '/private/senales.html'));
 	} else {
 		response.send('Por favor, iniciar sesión para ver esta página');
 	}
