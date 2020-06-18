@@ -75,7 +75,7 @@ app.get('/home', function(request, response) {
     	response.render('home', { html: html })
     	*/
 
-    	response.sendFile(path.join(__dirname + '/private/senales.html'), {root: __dirname })
+    	response.sendFile('/private/senales.html', {root: __dirname })
 
 		/*
 		fs.readFile(path.join(__dirname + '/private/senales.html'), function (error, pgResp) {
