@@ -70,7 +70,7 @@ app.get('/home', function(request, response) {
         response.write('<h1>Product Manaager</h1><br /><br />To create product please enter: ... ');
         */
 
-        var html = fs.readFileSync('./private/senales.html', 'utf8')
+        var html = fs.readFileSync(path.join(__dirname + '/private/senales.html'), 'utf8')
     	res.render('home', { html: html })
 
 		/*
