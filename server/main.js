@@ -24,7 +24,7 @@ con.connect(function(err) {
 
 app.use(express.static('public'));
 
-app.use('/home', express.static('private');
+app.use('/home', express.static('/private'));
 
 app.use(session({
 	secret: 'secret',
