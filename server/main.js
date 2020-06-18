@@ -23,6 +23,9 @@ con.connect(function(err) {
 /********************************/
 
 app.use(express.static('public'));
+
+app.use('/home', express.static(__dirname + '/private'));
+
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -31,6 +34,7 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
+
 
 /*
 app.get('/home', function(req, res){
@@ -61,23 +65,24 @@ app.post('/auth', function(request, response) {
 });
 
 
+/*
 app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
 		//response.send('Welcome back, ' + request.session.username + '!');
 		//response.sendFile(path.join(__dirname + '/private/senales.html'));
-		/*
+	
 		response.writeHead(200, { 'Content-Type': 'text/html' });
         response.write('<h1>Product Manaager</h1><br /><br />To create product please enter: ... ');
-        */
+        
 
-        /*
+        
         var html = fs.readFileSync(path.join(__dirname + '/private/senales.html'), 'utf8')
     	response.render('home', { html: html })
-    	*/
+    
 
     	response.sendFile('/private/senales.html', {root: __dirname })
 
-		/*
+		
 		fs.readFile(path.join(__dirname + '/private/senales.html'), function (error, pgResp) {
             if (error) {
                 response.writeHead(404);
@@ -87,7 +92,7 @@ app.get('/home', function(request, response) {
                 response.write(pgResp);
             }
         });
-        */
+      
         
 
 	} else {
@@ -95,6 +100,8 @@ app.get('/home', function(request, response) {
 	}
 	response.end();
 });
+*/
+
 
 
 
