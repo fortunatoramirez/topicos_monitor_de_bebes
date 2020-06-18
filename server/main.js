@@ -66,6 +66,9 @@ app.get('/home', function(request, response) {
 		//response.send('Welcome back, ' + request.session.username + '!');
 		//response.sendFile(path.join(__dirname + '/private/senales.html'));
 
+		response.writeHead(200, { 'Content-Type': 'text/html' });
+        response.write('<h1>Product Manaager</h1><br /><br />To create product please enter: ... ');
+		/*
 		fs.readFile(path.join(__dirname + '/private/senales.html'), function (error, pgResp) {
             if (error) {
                 response.writeHead(404);
@@ -75,6 +78,7 @@ app.get('/home', function(request, response) {
                 response.write(pgResp);
             }
         });
+        */
 
 	} else {
 		response.send('Por favor, iniciar sesión para ver esta página');
