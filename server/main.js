@@ -70,8 +70,12 @@ app.get('/home', function(request, response) {
         response.write('<h1>Product Manaager</h1><br /><br />To create product please enter: ... ');
         */
 
+        /*
         var html = fs.readFileSync(path.join(__dirname + '/private/senales.html'), 'utf8')
     	response.render('home', { html: html })
+    	*/
+
+    	response.sendFile(path.join(__dirname + '/private/senales.html'), {root: __dirname })
 
 		/*
 		fs.readFile(path.join(__dirname + '/private/senales.html'), function (error, pgResp) {
