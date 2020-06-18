@@ -24,8 +24,6 @@ con.connect(function(err) {
 
 app.use(express.static('public'));
 
-app.use('/home', express.static('/private'));
-
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -63,6 +61,9 @@ app.post('/auth', function(request, response) {
 		response.end();
 	}
 });
+
+
+app.use('/home', express.static(__dirname + '/private'));
 
 
 /*
