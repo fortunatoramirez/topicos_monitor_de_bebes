@@ -64,9 +64,9 @@ app.post('/auth', function(request, response) {
 app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
 		//response.send('Welcome back, ' + request.session.username + '!');
-		response.sendFile(path.join(__dirname + '/private/senales.html'));
+		//response.sendFile(path.join(__dirname + '/private/senales.html'));
 
-		fs.readFile("/private/senales.html", function (error, pgResp) {
+		fs.readFile(path.join(__dirname + '/private/senales.html'), function (error, pgResp) {
             if (error) {
                 response.writeHead(404);
                 response.write('Página no encontrada.');
