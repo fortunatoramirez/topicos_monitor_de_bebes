@@ -66,10 +66,10 @@ app.get('/home', function(request, response) {
 		//response.send('Welcome back, ' + request.session.username + '!');
 		response.sendFile(path.join(__dirname + '/private/senales.html'));
 
-		fs.readFile("private/senales.html", function (error, pgResp) {
+		fs.readFile("/private/senales.html", function (error, pgResp) {
             if (error) {
                 response.writeHead(404);
-                response.write('Contents you are looking are Not Found');
+                response.write('Página no encontrada.');
             } else {
                 response.writeHead(200, { 'Content-Type': 'text/html' });
                 response.write(pgResp);
