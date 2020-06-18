@@ -5,6 +5,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var io = require('socket.io')(server);
 var path = require('path');
+var fs = require('fs');
 
 /* Conexión a la base de datos */
 var mysql = require('mysql');
@@ -64,6 +65,17 @@ app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
 		//response.send('Welcome back, ' + request.session.username + '!');
 		response.sendFile(path.join(__dirname + '/private/senales.html'));
+
+		fs.readFile("private/senales.html", function (error, pgResp) {
+            if (error) {
+                response.writeHead(404);
+                response.write('Contents you are looking are Not Found');
+            } else {
+                response.writeHead(200, { 'Content-Type': 'text/html' });
+                response.write(pgResp);
+            }
+        });
+
 	} else {
 		response.send('Por favor, iniciar sesión para ver esta página');
 	}
