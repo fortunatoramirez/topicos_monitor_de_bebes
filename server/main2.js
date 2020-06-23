@@ -24,6 +24,18 @@ con.connect(function(err) {
 
 
 app.use("/",express.static('public'));
+app.use(entry)
+app.use("/private",express.static('private'));
+
+function entry(req, res, next) {
+    var user = "uuu";
+    if (user !== "john") {
+        res.set("WWW-Authenticate", "Basic realm=Authorization Required")
+        res.status(401).end()
+    } 
+    else { next() }
+}
+
 
 
 
