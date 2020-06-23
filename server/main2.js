@@ -24,17 +24,32 @@ con.connect(function(err) {
 
 
 app.use("/",express.static('public'));
-app.use(entry)
-app.use("/private",express.static('private'));
 
-function entry(req, res, next) {
-    var user = "uuu";
-    if (user !== "john") {
-        res.set("WWW-Authenticate", "Basic realm=Authorization Required")
-        res.status(401).end()
-    } 
-    else { next() }
-}
+
+app.post('/auth', function(request, response) {
+	var username = request.body.username;
+	var password = request.body.password;
+	if (username && password) {
+		con.query('SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				request.session.loggedin = true;
+				request.session.username = username;
+				//response.redirect('/home');
+				next();
+			} else {
+				response.send('Incorrect Username and/or Password!');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter Username and Password!');
+		response.end();
+	}
+
+
+});
+
+app.use("/private",express.static('private'));
 
 
 
