@@ -60,10 +60,14 @@ app.post('/auth', function(request, response) {
 		response.send('Please enter Username and Password!');
 		response.end();
 	}
+
+	app.use('/home', express.static(__dirname + '/private'));
 });
 
 
-app.use('/home', express.static(__dirname + '/private'));
+
+
+
 
 
 /*
