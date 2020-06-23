@@ -23,6 +23,7 @@ con.connect(function(err) {
 /********************************/
 
 app.use(express.static('public'));
+app.use('/home', express.static(__dirname + '/private'));
 
 app.use(session({
 	secret: 'secret',
@@ -61,7 +62,7 @@ app.post('/auth', function(request, response) {
 		response.end();
 	}
 
-	app.use('/home', express.static(__dirname + '/private'));
+
 });
 
 
