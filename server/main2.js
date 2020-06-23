@@ -23,11 +23,17 @@ con.connect(function(err) {
 /********************************/
 
 
-app.use(bodyParser.urlencoded({extended : true}));
-app.use(bodyParser.json());
+
 app.use("/",express.static('public'));
 
 
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 app.post('/auth', function(request, response) {
 	var username = request.body.username;
 	var password = request.body.password;
