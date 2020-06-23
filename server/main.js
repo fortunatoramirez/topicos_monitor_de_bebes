@@ -103,48 +103,6 @@ app.get('/home', function(request, response) {
 });
 */
 
-
-
-
-
-io.on('connection',function(socket){
-	socket.emit('messages',messages);
-	socket.on('new-message', function(msg){
-		messages.push(msg);
-		var sql = `INSERT INTO messages_2(nickname, text) VALUES ('${msg.author}', '${msg.text}')`;
-  		con.query(sql, function (err, result) {
-    		if (err) throw err;
-    		console.log("record inserted");
-		});
-  		io.sockets.emit('messages',messages);
-	});
-
-	socket.on('inicio_sesion', function(msg){
-		console.log(msg.usuario);
-		console.log(msg.contrasena);
-		var sql = `SELECT * FROM usuarios WHERE usuario = '${msg.usuario}' and contrasena = '${msg.contrasena}'`;
-		con.query(sql, function (err, result) {
-			if (err) throw err;
-               // console.log("datos");
-    	//	console.log(result);
-                if(result.length>0){
-                console.log("iniciando sesion correctamente");
-                 }
-    		io.sockets.emit('iniciar_sesion',result);
-		});
-	});
-
-	/*
-	socket.on("show-history", function(){
-		con.query("SELECT * FROM messages", function (err, result, fields) {
-    		if (err) throw err;
-    		//console.log(result);
-    		io.sockets.emit('messages',result);
-  		});
-	});
-	*/
-});
-
 server.listen(5001, function(){
 	console.log("Servidor corriendo en http://localhost:5001");
 
