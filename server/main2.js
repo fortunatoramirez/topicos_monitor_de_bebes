@@ -24,7 +24,7 @@ con.connect(function(err) {
 
 
 
-app.use("/",express.static('public'));
+app.use("/",express.static('public_sen'));
 
 
 
