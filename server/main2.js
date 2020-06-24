@@ -44,7 +44,6 @@ app.post('/auth', function(request, response) {
 				request.session.loggedin = true;
 				request.session.username = username;
 				response.redirect('/');
-				app.next();
 			} else {
 				response.send('Incorrect Username and/or Password!');
 			}			
