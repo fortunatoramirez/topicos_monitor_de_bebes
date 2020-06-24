@@ -43,7 +43,7 @@ app.post('/auth', function(request, response) {
 			if (results.length > 0) {
 				request.session.loggedin = true;
 				request.session.username = username;
-				response.redirect('/');
+				response.redirect('/sen');
 			} else {
 				response.send('Incorrect Username and/or Password!');
 			}			
@@ -57,7 +57,7 @@ app.post('/auth', function(request, response) {
 
 });
 
-app.use("/private",express.static('private'));
+app.use("/sen",express.static('public_sen'));
 
 
 
