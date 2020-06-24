@@ -18,7 +18,7 @@ var con = mysql.createConnection({
 });
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Connected to database.");
+  console.log("Connectado a la base de datos.");
 });
 /********************************/
 
@@ -42,12 +42,12 @@ app.post('/auth', function(request, response) {
 				request.session.username = username;
 				response.redirect('/sen');
 			} else {
-				response.send('Incorrect Username and/or Password!');
+				response.send('Usuario o contraseña incorrectos.');
 			}			
 			response.end();
 		});
 	} else {
-		response.send('Please enter Username and Password!');
+		response.send('Por favor, introducir usuario y contraseña');
 		response.end();
 	}
 
