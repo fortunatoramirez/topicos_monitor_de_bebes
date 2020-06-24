@@ -22,11 +22,8 @@ con.connect(function(err) {
 });
 /********************************/
 
-
-
 app.use("/",express.static('public'));
-
-
+app.use("/sen",express.static('public_sen'));
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
@@ -57,7 +54,7 @@ app.post('/auth', function(request, response) {
 
 });
 
-app.use("/sen",express.static('public_sen'));
+
 
 
 
