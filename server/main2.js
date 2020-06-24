@@ -24,7 +24,7 @@ con.connect(function(err) {
 
 
 
-app.use("/",express.static('public_sen'));
+app.use("/",express.static('public'));
 
 
 
@@ -43,7 +43,7 @@ app.post('/auth', function(request, response) {
 			if (results.length > 0) {
 				request.session.loggedin = true;
 				request.session.username = username;
-				//response.redirect('/home');
+				response.redirect('/');
 				app.next();
 			} else {
 				response.send('Incorrect Username and/or Password!');
