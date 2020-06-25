@@ -231,7 +231,7 @@ function grafica_temperatura(data){
                 },
             xAxis: {
                 type: 'datetime',
-                tickPixelInterval: 150,
+                tickPixelInterval: 5, //150
                 scrollbar: {
                         enabled: true
                            }
