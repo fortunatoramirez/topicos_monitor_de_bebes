@@ -16,6 +16,8 @@ var host = "ws://127.0.0.1:"+port; // No need to change this if using localhost
 var explodedValues = [0]; //initial value for the plot = 0; 
 var temp = [];
 var carb = [];
+var temp_tiempos = [];
+var carb_tiempos = [];
 
 function init() {
 	try {
@@ -32,14 +34,18 @@ function init() {
          //});
 
         socket.on('temperatura', function(data){
-            console.log(data);
+            //console.log(data);
+            var time = (new Date()).getTime();
+            temp_tiempos.push(time)
+
             temp.push(parseFloat(data));
+            
             if (temp.length==5)
             {
-                console.log("entra al if");
-                grafica_temperatura(temp);
+                //console.log("entra al if");
+                grafica_temperatura(temp, temp_tiempos);
                 temp=[];
-
+                temp_tiempos=[];
             }
                 
         });
@@ -49,7 +55,7 @@ function init() {
             carb.push(parseFloat(data));
             if (carb.length==5)
             {
-                console.log("entra al if");
+                //console.log("entra al if");
                 grafica_carbono(carb);
                 carb=[];
 
@@ -189,16 +195,16 @@ contador2=0;
 var k;
 k=0;
 var dat2 = [];
-function grafica_temperatura(data){
+function grafica_temperatura(data, tiempos){
     console.log(data);
 
     for(var i=0; i<data.length; i++)
     {
         //dat2.push(data[i])
-        var time = (new Date()).getTime();
-        console.log(time);
+        //var time = (new Date()).getTime();
+        //console.log(time);
         dat2.push({
-                    x: time,
+                    x: tiempos[i],
                     y: data[i]
                 });
         k++;
