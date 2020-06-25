@@ -330,7 +330,7 @@ function grafica_carbono(data, tiempos){
                 },
             yAxis: {
                 min: 0,
-                max:10000,
+                max:1023,
                 tickAmount: 25
                 
                 },
