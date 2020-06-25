@@ -39,7 +39,7 @@ function init() {
             temp_tiempos.push(time)
 
             temp.push(parseFloat(data));
-            
+
             if (temp.length==5)
             {
                 //console.log("entra al if");
@@ -51,14 +51,18 @@ function init() {
         });
 
         socket.on('carbono', function(data){
-            console.log(data);
+            //console.log(data);
+            var time = (new Date()).getTime();
+            carb_tiempos.push(time);
+
             carb.push(parseFloat(data));
+
             if (carb.length==5)
             {
                 //console.log("entra al if");
-                grafica_carbono(carb);
+                grafica_carbono(carb, carb_tiempos);
                 carb=[];
-
+                carb_tiempos=[];
             }
                 
         });
@@ -196,7 +200,7 @@ var k;
 k=0;
 var dat2 = [];
 function grafica_temperatura(data, tiempos){
-    console.log(data);
+    //console.log(data);
 
     for(var i=0; i<data.length; i++)
     {
@@ -276,14 +280,15 @@ contador3=0;
 var l;
 l=0;
 var dat3 = [];
-function grafica_carbono(data){
-    console.log(data);
+function grafica_carbono(data, tiempos){
+    //console.log(data);
 
     for(var i=0; i<data.length; i++)
     {   
-        var time = (new Date()).getTime();
+        //var time = (new Date()).getTime();
+
         dat3.push({
-                    x: time,
+                    x: tiempos[i],
                     y: data[i]
                 });
         //dat3.push(data[i])
