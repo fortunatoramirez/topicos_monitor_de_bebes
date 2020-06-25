@@ -196,6 +196,7 @@ function grafica_temperatura(data){
     {
         //dat2.push(data[i])
         var time = (new Date()).getTime();
+        console.log(time);
         dat2.push({
                     x: time,
                     y: data[i]
@@ -231,7 +232,7 @@ function grafica_temperatura(data){
                 },
             xAxis: {
                 type: 'datetime',
-                tickPixelInterval: 5, //150
+                tickPixelInterval: 150,
                 scrollbar: {
                         enabled: true
                            }
